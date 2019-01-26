@@ -4,6 +4,9 @@ const path = require("path");
 
 const PORT = 8080;
 
+const views = require('./routes/views');
+
+
 app.set("views", path.join(__dirname, "views"));
 app.use("/static", express.static(path.join(__dirname, "public")));
 
@@ -15,9 +18,7 @@ io.on("connection", function(socket) {
   console.log("a user connected");
 });
 
-app.get("/", function(req, res) {
-  res.send("Hello World!");
-});
+app.use('/', views);
 
 http.listen(PORT, function() {
   console.log("Running lit.haus on port " + PORT + "!");
